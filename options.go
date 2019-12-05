@@ -245,6 +245,16 @@ func WritebackCache() MountOption {
 	}
 }
 
+// AtomicTrunc enables combining write and truncate requests for the
+// same handle. Without this, truncate requests must be handled
+// separately.
+func AtomicTrunc() MountOption {
+	return func(conf *mountConfig) error {
+		conf.initFlags |= InitAtomicTrunc
+		return nil
+	}
+}
+
 // OSXFUSEPaths describes the paths used by an installed OSXFUSE
 // version. See OSXFUSELocationV3 for typical values.
 type OSXFUSEPaths struct {
